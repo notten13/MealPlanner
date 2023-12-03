@@ -22,16 +22,10 @@
                         <td>{{ $recipe->title }}</td>
                         <td>{{ formatDuration($recipe->cooking_time) }}</td>
                         <td>
-                            @for ($i = 0; $i < 5; $i++)
-                                @if ($i < $recipe->rating)
-                                    &#9733; <!-- Unicode for filled star -->
-                                @else
-                                    &#9734; <!-- Unicode for empty star -->
-                                @endif
-                            @endfor
+                            @include('components.starRating', ['rating' => $recipe->rating])
                         </td>
                         <td class="text-end">
-                            <button type="button" class="btn btn-primary">View</button>
+                            <a href="{{ route('recipes.show', $recipe) }}" class="btn btn-primary">View</a>
                         </td>
                     </tr>
                 @endforeach
@@ -44,7 +38,7 @@
         </div>
     @endif
 
-    {{ $recipes->links('pagination::bootstrap-5') }}
+    {{ $recipes->links() }}
 
 
 @endsection

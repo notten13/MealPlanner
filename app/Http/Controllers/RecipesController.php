@@ -13,7 +13,7 @@ class RecipesController extends Controller
     public function index()
     {
         return view('recipes.index', [
-            "recipes" => Recipe::orderBy('created_at', 'desc')->paginate(20),
+            "recipes" => Recipe::query()->orderBy('created_at', 'desc')->paginate(20),
         ]);
     }
 
@@ -36,9 +36,11 @@ class RecipesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Recipe $recipe)
     {
-        //
+        return view('recipes.show', [
+            "recipe" => $recipe
+        ]);
     }
 
     /**
